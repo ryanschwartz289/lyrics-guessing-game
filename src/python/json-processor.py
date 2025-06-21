@@ -17,24 +17,25 @@ section_re = re.compile(
 )
 
 
-# Helper to split lyrics into unique sections
+# Helper to split lyrics into all sections (allow duplicates)
 def split_sections(lyric):
-    sections = {}
+    sections = []
+    titles = set()
     matches = list(section_re.finditer(lyric))
     for i, match in enumerate(matches):
-        start = match.start()
+        start = match.end()
         end = matches[i + 1].start() if i + 1 < len(matches) else len(lyric)
         section_title = match.group(0)
         section_content = lyric[start:end].strip()
-        # Only keep the first occurrence of each section type
-        section_type = re.sub(r"[\[:\]]", "", section_title).split()[0].lower()
-        if section_type not in sections:
-            sections[section_type] = {
-                "title": section_title,
-                "content": section_content,
-            }
-    # Return as a list of dicts
-    return list(sections.values())
+        if section_title.split(":")[0].strip() not in titles:
+            titles.add(section_title.split(":")[0].strip())
+            sections.append(
+                {
+                    "title": section_title,
+                    "content": section_content,
+                }
+            )
+    return sections
 
 
 out_lyrics = [split_sections(lyric) for lyric in lyrics]

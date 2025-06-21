@@ -2,6 +2,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  box-sizing: border-box;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -24,9 +25,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
-
   min-width: 320px;
   min-height: 100vh;
 }
@@ -36,31 +34,6 @@ h1 {
   line-height: 1.1;
 }
 
-.lyrics-container {
-  max-width: 800px;
-  padding: 1.5em;
-  margin: 0 auto;
-  width: 100%;
-  padding-left: 0;
-}
-/* .lyrics-container.correct-animate {
-  animation: correctFlash 0.7s;
-} */
-
-/* @keyframes correctFlash {
-  0% {
-    background-color: #242424;yes
-  }
-  20% {
-    background-color: #4caf50;
-  }
-  80% {
-    background-color: #4caf50;
-  }
-  100% {
-    background-color: #242424;
-  }
-} */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

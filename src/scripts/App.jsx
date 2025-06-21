@@ -21,15 +21,19 @@ function App() {
   };
 
   return (
-    <>
-      <div className="App">
-        <h1>Guess the Future Song</h1>
+    <div className="App">
+      <h1 className="app-title">Guess the Future Song</h1>
+      <div className="app-score">
         <Score total={total} correctCount={correctCount} />
+      </div>
+      <div className="app-searchbar">
         <SearchBar
           items={data}
           correctTitle={correctTitle}
           onSubmit={handleSubmit}
         />
+      </div>
+      <div className="app-lyrics">
         <Lyrics
           data={data}
           setCorrectTitle={setCorrectTitle}
@@ -37,7 +41,7 @@ function App() {
           correct={correct}
         />
       </div>
-    </>
+    </div>
   );
 }
 

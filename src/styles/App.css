@@ -1,0 +1,67 @@
+.App {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  min-height: 100vh;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-x: visible;
+}
+
+.lyrics-container {
+  max-width: 800px;
+  max-height: 80vh;
+  padding: 1.5em;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 0;
+  margin-left: 0;
+  max-height: 40vh;
+  border-radius: 12px;
+}
+
+.searchbar-container {
+  position: relative;
+  width: 800px;
+  margin: 0 auto;
+}
+
+.searchbar-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.autocomplete-box {
+  width: 60%;
+}
+
+.button-box {
+  width: 20%;
+  min-width: 120px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.correct-answer {
+  position: absolute;
+  top: 50%;
+  /* left will be set inline by JS for dynamic placement */
+  transform: translateY(-50%);
+  color: #ffd600;
+  font-weight: 600;
+  font-size: 1.1em;
+  min-width: 200px;
+  transition: opacity 0.4s;
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  display: block;
+}
