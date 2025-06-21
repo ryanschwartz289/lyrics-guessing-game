@@ -1,9 +1,8 @@
 import json
 import re
 
-json_file = (
-    "/Users/ryanschwartz/Desktop/Code/Websites/future-lyrics/src/data/future.json"
-)
+artist_name = "Future"
+json_file = f"/Users/ryanschwartz/Desktop/Code/Websites/future-lyrics/src/data/{artist_name.lower()}.json"
 with open(json_file, "r", encoding="utf-8") as file:
     data = json.load(file)
 artist_name = data.get("artist", "Unknown Artist")

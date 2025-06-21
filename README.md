@@ -1,12 +1,71 @@
-# React + Vite
+# Future Lyrics
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web app for guessing the titles of Future songs based on their lyrics. Built with React, Vite, and Material UI.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Randomly displays a section of lyrics from a Future song.
+- Users guess the song title using an autocomplete search bar.
+- Immediate feedback for correct/incorrect answers, with animations.
+- Shows the correct answer if guessed incorrectly.
+- Responsive and modern UI.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (v16 or higher recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```sh
+   git clone <repo-url>
+   cd future-lyrics
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
+
+### Running the App
+
+Start the development server:
+
+```sh
+npm run dev
+# or
+yarn dev
+```
+
+Visit `http://localhost:5173` in your browser.
+
+### Building for Production
+
+```sh
+npm run build
+# or
+yarn build
+```
+
+The output will be in the `dist/` folder.
+
+## Project Structure
+
+- `src/scripts/components/` — React components (e.g., `Lyrics.jsx`, `SearchBar.jsx`)
+- `src/data/` — Song data in JSON format
+- `src/styles/` — CSS files
+- `public/` — Static assets
+- `src/python/` — Python scripts for data processing
+
+## Data
+
+- Song data is stored in `src/data/future.json` and `src/data/titles-and-lyrics.json`.
+- To update or process data, use the Python scripts in `src/python/`.
+
+## License
+
+MIT

@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// Line below is correct, but TS will complain about it
+// @ts-ignore
 import SearchBar from "./components/SearchBar";
 import "../styles/App.css";
 import data from "../data/titles-and-lyrics.json";
