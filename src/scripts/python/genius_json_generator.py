@@ -15,9 +15,9 @@ with open(
     encoding="utf-8",
 ) as file:
     artist_name = file.read().strip()
-# print(artist_name)
+
 genius = lyricsgenius.Genius()
-artist = genius.search_artist(artist_name, max_songs=20, sort="popularity")
+artist = genius.search_artist(artist_name, max_songs=3, sort="popularity")
 artist_name = artist_name.replace(" ", "_").lower()
 artist.save_lyrics(artist_name.lower(), overwrite=True)  # type: ignore
 

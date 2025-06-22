@@ -29,8 +29,10 @@ dist-ssr
 .env.test.local
 .env.production.local
 
-// add pycache
+
 __pycache__/
+
+/public/artist_name.txt
 
 
 # only add the elvis files in src/data/processed and src/data/raw
