@@ -17,6 +17,16 @@ with open(
     artist_name = file.read().strip()
 
 genius = lyricsgenius.Genius()
+genius.excluded_terms = [
+    "(Remix)",
+    "(Live)",
+    "[Live Acoustic]",
+    "(Acoustic)",
+    "(Instrumental)",
+    "(Demo)",
+    "(Remastered)",
+]
+
 artist = genius.search_artist(artist_name, max_songs=3, sort="popularity")
 artist_name = artist_name.replace(" ", "_").lower()
 artist.save_lyrics(artist_name.lower(), overwrite=True)  # type: ignore

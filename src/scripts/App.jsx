@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 // Line below is correct, but TS will complain about it
 // @ts-ignore
@@ -7,6 +8,12 @@ import "../styles/App.css";
 import Score from "./components/Score";
 import Lyrics from "./components/Lyrics";
 import SongCountInput from "./components/SongCountInput";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 function App() {
   const [artistName, setArtistName] = useState("");
@@ -48,34 +55,36 @@ function App() {
   }, [numSongs]);
 
   return (
-    <div className="App">
-      <h1 className="app-title">
-        Guess the {artistName ? artistName : "Artist's"} Song
-      </h1>
-      <SongCountInput
-        numSongs={numSongs}
-        setNumSongs={setNumSongs}
-        max={data.length}
-      />
-      <div className="app-score">
-        <Score total={total} correctCount={correctCount} />
-      </div>
-      <div className="app-searchbar">
-        <SearchBar
-          items={limitedData}
-          correctTitle={correctTitle}
-          onSubmit={handleSubmit}
+    <ThemeProvider theme={darkTheme}>
+      <div className="App">
+        <h1 className="app-title">
+          Guess the {artistName ? artistName : "Artist's"} Song
+        </h1>
+        <SongCountInput
+          numSongs={numSongs}
+          setNumSongs={setNumSongs}
+          max={data.length}
         />
+        <div className="app-score">
+          <Score total={total} correctCount={correctCount} />
+        </div>
+        <div className="app-searchbar">
+          <SearchBar
+            items={limitedData}
+            correctTitle={correctTitle}
+            onSubmit={handleSubmit}
+          />
+        </div>
+        <div className="app-lyrics">
+          <Lyrics
+            data={limitedData}
+            setCorrectTitle={setCorrectTitle}
+            nextSong={nextSong}
+            correct={correct}
+          />
+        </div>
       </div>
-      <div className="app-lyrics">
-        <Lyrics
-          data={limitedData}
-          setCorrectTitle={setCorrectTitle}
-          nextSong={nextSong}
-          correct={correct}
-        />
-      </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

@@ -4,7 +4,6 @@ import re
 # * Run this script from the root of the project.
 
 
-# TODO: make arrow key highlights easier
 # import artist_name from data/artist_name.txt
 def process_json():
     """
@@ -58,8 +57,6 @@ def process_json():
     songs = [
         {"title": title, "lyrics": lyric_sections, "image": image}
         for title, lyric_sections, image in zip(song_titles, out_lyrics, images)
-        if "remix"
-        not in title.lower()  # to prevent duplicates where the original and remix would both be valid answers
     ]
     # songs = sorted(songs, key=lambda x: x["title"].lower())
 
