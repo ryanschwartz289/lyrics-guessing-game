@@ -43,6 +43,8 @@ function App() {
   const limitedData = useMemo(() => {
     const sliced = data.slice(0, numSongs);
     return sliced.sort((a, b) => a.title.localeCompare(b.title));
+    // data is defined in the useEffect above
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numSongs]);
 
   return (

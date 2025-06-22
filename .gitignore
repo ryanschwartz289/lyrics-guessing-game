@@ -29,9 +29,15 @@ dist-ssr
 .env.test.local
 .env.production.local
 
-# add the files in src/data/processed and src/data/raw to the gitignore
-# but not the directories themselves
+// add pycache
+__pycache__/
+
+
+# only add the elvis files in src/data/processed and src/data/raw
+# Ignore everything in processed and raw
 src/data/processed/*
-!src/data/processed/.gitkeep
 src/data/raw/*
-!src/data/raw/.gitkeep
+
+# But do NOT ignore elvis files in those folders
+!src/data/processed/elvis_presley.json
+!src/data/raw/elvis_presley.json
