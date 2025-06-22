@@ -28,3 +28,10 @@ dist-ssr
 .env.development.local
 .env.test.local
 .env.production.local
+
+# add the files in src/data/processed and src/data/raw to the gitignore
+# but not the directories themselves
+src/data/processed/*
+!src/data/processed/.gitkeep
+src/data/raw/*
+!src/data/raw/.gitkeep

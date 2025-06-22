@@ -1,5 +1,7 @@
 import { TextField, Autocomplete, Button, Fade } from "@mui/material";
 import { useState, useRef, useLayoutEffect } from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 export default function SearchBar({ items, correctTitle, onSubmit }) {
   const [inputValue, setInputValue] = useState("");
@@ -12,8 +14,6 @@ export default function SearchBar({ items, correctTitle, onSubmit }) {
   const buttonRef = useRef(null);
   const autocompleteRef = useRef(null);
   const answerRef = useRef(null);
-  // Map the items array to extract just the titles
-  const titles = items.map((item) => item.title);
 
   useLayoutEffect(() => {
     if (buttonRef.current && answerRef.current) {
@@ -63,34 +63,66 @@ export default function SearchBar({ items, correctTitle, onSubmit }) {
     <div className="searchbar-container">
       <div className="searchbar-flex">
         <div ref={autocompleteRef} className="autocomplete-box">
-          <Autocomplete
-            options={titles}
-            value={inputValue}
-            onInputChange={(event, newInputValue) => {
-              setInputValue(newInputValue);
-            }}
-            renderInput={(params) => <TextField {...params} label="Songs" />}
-            sx={{
-              backgroundColor: "black",
-              "& .MuiInputLabel-root": { color: "white" },
-              "& .MuiInputBase-input": { color: "white" },
-              width: "100%",
-              borderRadius: "4px",
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-              paddingLeft: "0",
-              "& .MuiInputBase-root": {
-                paddingLeft: 0, // Remove left padding from the input root
+          {/* Fix the theme issue */}
+          <ThemeProvider
+            theme={createTheme({
+              palette: {
+                mode: "dark",
               },
-            }}
-            slotProps={{
-              paper: {
-                sx: {
-                  bgcolor: "#121212", // Dark background
-                  color: "#ffffff", // White text
+            })}
+          >
+            <Autocomplete
+              options={items}
+              getOptionLabel={(option) =>
+                typeof option === "string" ? option : option?.title || ""
+              }
+              value={inputValue}
+              onInputChange={(event, newInputValue) => {
+                setInputValue(newInputValue);
+              }}
+              renderInput={(params) => <TextField {...params} label="Songs" />}
+              renderOption={(props, option) => {
+                const { key, ...otherProps } = props;
+                return (
+                  <li key={key} {...otherProps}>
+                    <img
+                      src={option.image}
+                      alt=""
+                      style={{ width: 40, height: 40, marginRight: 10 }}
+                    />
+                    {option.title}
+                  </li>
+                );
+              }}
+              sx={{
+                backgroundColor: "black",
+                width: "100%",
+                borderRadius: "4px",
+                //// boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                paddingLeft: "0",
+                "& .MuiInputBase-root": {
+                  paddingLeft: 0, // Remove left padding from the input root
                 },
-              },
-            }}
-          />
+              }}
+              //// slotProps={{
+              ////   paper: {
+              ////     sx: {
+              //       // bgcolor: "#000000", // Background for dropdown
+              //       //   color: "#ffffff",
+              //       //   "& .MuiAutocomplete-option": {
+              //       //     "&:hover": {
+              //       //       backgroundColor: "#1e1e1e", // hover color
+              //       //     },
+              //       //     "&.Mui-focused": {
+              //       //       backgroundColor: "#1e1e1e", // this is the arrow-keyed option
+              //       //     },
+              //       //   },
+              //       // },
+              ////     },
+              ////   },
+              // }} */
+            />
+          </ThemeProvider>
         </div>
         <div className="button-box">
           <Button
@@ -99,8 +131,8 @@ export default function SearchBar({ items, correctTitle, onSubmit }) {
             color="primary"
             onClick={handleClick}
             sx={{
-              height: "56px",
               width: "100%",
+              height: 53,
               minWidth: 120,
               transition: "background-color 0.2s",
               backgroundColor: animate
