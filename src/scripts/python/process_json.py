@@ -25,6 +25,7 @@ def process_json():
         for song in data.get("songs", [])
     ]
     lyrics = [song.get("lyrics", "No Lyrics") for song in data.get("songs", [])]
+    # print(song_titles[1], lyrics[1])
 
     # Regex for section headers
     section_re = re.compile(
@@ -37,19 +38,30 @@ def process_json():
         sections = []
         titles = set()
         matches = list(section_re.finditer(lyric))
-        for i, match in enumerate(matches):
-            start = match.end()
-            end = matches[i + 1].start() if i + 1 < len(matches) else len(lyric)
-            section_title = match.group(0)
-            section_content = lyric[start:end].strip()
-            if section_title.split(":")[0].strip() not in titles:
-                titles.add(section_title.split(":")[0].strip())
-                sections.append(
-                    {
-                        "title": section_title,
-                        "content": section_content,
-                    }
-                )
+        if matches:
+            for i, match in enumerate(matches):
+                start = match.end()
+                end = matches[i + 1].start() if i + 1 < len(matches) else len(lyric)
+                section_title = match.group(0)
+                section_content = lyric[start:end].strip()
+                if section_title.split(":")[0].strip() not in titles:
+                    titles.add(section_title.split(":")[0].strip())
+                    sections.append(
+                        {
+                            "title": section_title,
+                            "content": section_content,
+                        }
+                    )
+        else:
+            # No section headers: if lyrics start after a 'Lyrics' marker, trim to start after it
+            match = re.search(r"(?i)lyrics\s*\n?", lyric)
+            if match:
+                lyric = lyric[match.end() :]
+            parts = [
+                part.strip() for part in re.split(r"\n\s*\n", lyric) if part.strip()
+            ]
+            for idx, part in enumerate(parts):
+                sections.append({"title": f"Section {idx+1}", "content": part})
         return sections
 
     out_lyrics = [split_sections(lyric) for lyric in lyrics]
